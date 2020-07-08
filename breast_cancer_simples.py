@@ -10,7 +10,7 @@ import pandas as pd
 X= pd.read_csv('data/entradas_breast.csv')
 Y= pd.read_csv('data/saidas_breast.csv')
  
-
+# === Divisao da base de dados
 from sklearn.model_selection import train_test_split
 
 x_train,x_test,y_train,y_test= train_test_split(X,Y,test_size=0.25)
@@ -38,7 +38,7 @@ classificador.add(Dense(units=1, activation='sigmoid'))
 # == Modelando optimizer 
 
 otimizador = keras.optimizers.Adam(learning_rate=0.001, beta_1=0.001, beta_2=0.001, clipvalue=0.5)
-# pesquisar sobre os parâmetros  betas e clipvalue na api
+# pesquisar sobre os parâmetros  betas e clipvalue na api <<<< IMPLICAM SIGNIFICATIVAMENTE
 
 #==== Compilar
 # o paramerto optimizer é o algoritmo que realiza o ajuste dos pesos
