@@ -19,16 +19,30 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense
 
+# ===== Construindo a rede
+# === Instanciando o tipo 
 classificador=Sequential()
-# Camada de Entrada
+# === Camada de Entrada
 classificador.add(Dense(units= 16, activation='relu', kernel_initializer='random_uniform', input_dim=30))
- # input_dim = quantidade de atributos de X
-#camada de saida
-classificador.add(Dense(units=1, activation='sigmoid'))
-# activation='sigmoid' por ser um problema de classificação
+ # input_dim = quantidade de atributos de X. OBS: apenas para a primeira camada
+ 
+ #=== Adicioanndo segunda camada
+classificador.add(Dense(units= 16, activation='relu', kernel_initializer='random_uniform'))
+# Testar a melhor combinação dos parâmetros, seja quantidade de neurônios, funções de ativação, kernel  
 
-#compilar
-classificador.compile(optimizer='adam', loss='binary_crossentropy',
+#=== Camada de saida
+classificador.add(Dense(units=1, activation='sigmoid'))
+# Escolher corretamente a função de ativação para a saída. OBS activation='sigmoid' por ser um problema de classificação
+
+
+# == Modelando optimizer 
+
+otimizador = keras.optimizers.Adam(learning_rate=0.001, beta_1=0.001, beta_2=0.001, clipvalue=0.5)
+# pesquisar sobre os parâmetros  betas e clipvalue na api
+
+#==== Compilar
+# o paramerto optimizer é o algoritmo que realiza o ajuste dos pesos
+classificador.compile(optimizer=otimizador, loss='binary_crossentropy',
                       metrics=['binary_accuracy'])
 #treino
 classificador.fit(x=x_train,y=y_train,batch_size=10,epochs=100)     
