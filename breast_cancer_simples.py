@@ -48,6 +48,14 @@ classificador.compile(optimizer=otimizador, loss='binary_crossentropy',
 classificador.fit(x=x_train,y=y_train,batch_size=10,epochs=100)     
 # o output accuracy diz respeito a o teste aplicado na propria base de treino. desconsiderar
 
+#=== Visualizando os pesos da rede
+pesos_camada_0=classificador.layers[0].get_weights()
+# = array[0] diz respeito aos pesos da camada de entrada à camada de saída.
+# = array[1] diz respeiro aos pesos da Bias Unit
+pesos_camada_1=classificador.layers[1].get_weights()
+pesos_camada_2=classificador.layers[2].get_weights()
+
+
 #teste 
 predicted_data=classificador.predict(x=x_test)
 # o retorno desta função é  à probabilidade prevista para cada um dos registros, segundo o modelo
