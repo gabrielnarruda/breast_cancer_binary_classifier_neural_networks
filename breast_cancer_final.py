@@ -18,14 +18,9 @@ classificador.compile(optimizer = 'adam', loss = 'binary_crossentropy',
                       metrics = ['binary_accuracy'])
 classificador.fit(x=X, y=Y, batch_size = 10, epochs = 100)
 
-### === Teste para um registro aleatório
+classificador_json= classificador.to_json()
 
-novo = np.array([[15.80, 8.34, 118, 900, 0.10, 0.26, 0.08, 0.134, 0.178,
-                  0.20, 0.05, 1098, 0.87, 4500, 145.2, 0.005, 0.04, 0.05, 0.015,
-                  0.03, 0.007, 23.15, 16.64, 178.5, 2018, 0.14, 0.185,
-                  0.84, 158, 0.363]])
-previsao = classificador.predict(novo)
-previsao = (previsao > 0.5)
+with open('breast_cancer_sequential_dense_nn','w') as json_file: 
+    json_file.write(classificador_json)
 
-### ======
-
+classificador.save_weights('classificador_breast.h5')
