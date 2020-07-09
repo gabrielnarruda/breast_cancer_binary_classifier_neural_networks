@@ -4,7 +4,7 @@ Created on Tue Jul  7 23:22:39 2020
 
 @author: gabrielnarruda
 """
-
+### STATS MODEL
 
 import pandas as pd
 import keras
