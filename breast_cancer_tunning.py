@@ -34,4 +34,17 @@ def criar_rede(optimizer, loss, kernel_initializer, activation, neurons):
 classificador= KerasClassifier(build_fn=criar_rede)
 parametros={'batch_size':[10,30],
             'epochs':[50,100],
-            'optimizer':['adam']}
+            'optimizer':['adam','sgd'],
+            'loss':['binary_crossentropy','hinge'],
+            'kernel_activation':['random_uniform','normal'],
+            'activation':['relu','tanh'],
+            'neurons':[16,8]}
+
+grid_search=GridSearchCV(estimator=classificador,
+                         param_grid=parametros,
+                         scoring='accuracy',
+                         cv=5)
+
+grid_search=grid_search.fit(X=X,y=Y)
+melhores_parametros = grid_search.best_params_
+melhor_precisao = grid_search.best_score_
