@@ -3,8 +3,8 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Dropout
 
-previsores = pd.read_csv('entradas_breast.csv')
-classe = pd.read_csv('saidas_breast.csv')
+X= pd.read_csv('data/entradas_breast.csv')
+Y= pd.read_csv('data/saidas_breast.csv')
 
 classificador = Sequential()
 classificador.add(Dense(units = 8, activation = 'relu', 
@@ -16,7 +16,7 @@ classificador.add(Dropout(0.2))
 classificador.add(Dense(units = 1, activation = 'sigmoid'))
 classificador.compile(optimizer = 'adam', loss = 'binary_crossentropy',
                       metrics = ['binary_accuracy'])
-classificador.fit(previsores, classe, batch_size = 10, epochs = 100)
+classificador.fit(x=X, y=Y, batch_size = 10, epochs = 100)
 
 ### === Teste para um registro aleatório
 
